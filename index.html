@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Space-Y</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:
+    linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.75)),
+    url("https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=2000&q=90");
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+    color:white;
+}
+
+header{
+    position:sticky;
+    top:0;
+    width:100%;
+    background:rgba(0,0,0,.4);
+    backdrop-filter:blur(10px);
+    box-shadow:0 2px 15px rgba(0,0,0,.4);
+    z-index:1000;
+}
+
+nav{
+    max-width:1200px;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 30px;
+}
+
+.logo img{
+    width:180px;
+    border-radius:10px;
+}
+
+.right ul{
+    display:flex;
+    gap:35px;
+}
+
+.right ul li{
+    list-style:none;
+}
+
+.right ul li a{
+    color:white;
+    text-decoration:none;
+    cursor:pointer;
+    transition:.3s;
+    font-size:18px;
+    font-weight:500;
+}
+
+.right ul li a:hover{
+    color:#00e5ff;
+}
+
+.hero{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    max-width:1200px;
+    min-height:calc(100vh - 85px);
+    margin:auto;
+    padding:20px;
+    gap:50px;
+}
+
+.hero-text{
+    flex:1;
+}
+
+.hero-text h1{
+    font-size:55px;
+    margin-bottom:20px;
+}
+
+.hero-text p{
+    font-size:18px;
+    color:#ddd;
+    line-height:1.7;
+    margin-bottom:30px;
+}
+
+.btn{
+    display:inline-block;
+    padding:15px 35px;
+    background:#00e5ff;
+    color:black;
+    text-decoration:none;
+    border-radius:40px;
+    font-size:18px;
+    font-weight:bold;
+    transition:.3s;
+    border:none;
+    cursor:pointer;
+}
+
+.btn:hover{
+    background:white;
+    transform:scale(1.08);
+}
+
+.hero-image{
+    flex:1;
+    text-align:center;
+}
+
+.hero-image img{
+    width:100%;
+    max-width:550px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,.5);
+    transition:.4s;
+}
+
+.hero-image img:hover{
+    transform:scale(1.05);
+}
+
+.content-section{
+    min-height:100vh;
+    padding:100px 30px;
+    max-width:1200px;
+    margin:auto;
+}
+
+.content-box{
+    background:rgba(0,0,0,.55);
+    backdrop-filter:blur(12px);
+    padding:40px;
+    border-radius:25px;
+    box-shadow:0 10px 30px rgba(0,0,0,.5);
+}
+
+.content-box h2{
+    font-size:42px;
+    color:#00e5ff;
+    margin-bottom:20px;
+}
+
+.content-box p{
+    font-size:18px;
+    line-height:1.8;
+    color:#ddd;
+    margin-bottom:25px;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+    margin-top:30px;
+}
+
+.card{
+    background:rgba(255,255,255,.08);
+    padding:25px;
+    border-radius:18px;
+    transition:.3s;
+    border:1px solid rgba(255,255,255,.1);
+}
+
+.card:hover{
+    transform:translateY(-8px);
+    background:rgba(0,229,255,.12);
+}
+
+.card h3{
+    color:#00e5ff;
+    margin-bottom:10px;
+    font-size:22px;
+}
+
+.card p{
+    font-size:15px;
+    margin:0;
+}
+
+.back-btn{
+    margin-top:30px;
+}
+
+.news-item{
+    border-left:4px solid #00e5ff;
+    padding:20px;
+    margin:20px 0;
+    background:rgba(255,255,255,.06);
+    border-radius:10px;
+}
+
+.news-item h3{
+    margin-bottom:8px;
+}
+
+.news-item p{
+    margin:0;
+}
+
+.visualization-box{
+    text-align:center;
+}
+
+.orbit{
+    width:280px;
+    height:280px;
+    border:2px solid rgba(0,229,255,.5);
+    border-radius:50%;
+    margin:40px auto;
+    position:relative;
+    animation:rotate 8s linear infinite;
+}
+
+.orbit::before{
+    content:"";
+    width:70px;
+    height:70px;
+    background:#ff8c00;
+    border-radius:50%;
+    box-shadow:0 0 40px #ff8c00;
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+}
+
+.planet{
+    width:25px;
+    height:25px;
+    background:#00e5ff;
+    border-radius:50%;
+    position:absolute;
+    top:-12px;
+    left:50%;
+    box-shadow:0 0 20px #00e5ff;
+}
+
+@keyframes rotate{
+    from{
+        transform:rotate(0deg);
+    }
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+.about-list{
+    margin:20px 0;
+    padding-left:25px;
+}
+
+.about-list li{
+    margin:12px 0;
+    color:#ddd;
+    font-size:17px;
+}
+
+@media(max-width:900px){
+
+    .hero{
+        flex-direction:column;
+        text-align:center;
+        padding-top:60px;
+    }
+
+    .right ul{
+        gap:15px;
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+
+    .right ul li a{
+        font-size:15px;
+    }
+
+    .hero-text h1{
+        font-size:38px;
+    }
+
+    .logo img{
+        width:140px;
+    }
+
+    .content-box h2{
+        font-size:32px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<nav>
+
+<div class="logo">
+    <img src="space.jpeg" alt="Logo">
+</div>
+
+<div class="right">
+    <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#science">Science</a></li>
+        <li><a href="#visualization">Visualization</a></li>
+        <li><a href="#news">News</a></li>
+        <li><a href="#about">About</a></li>
+    </ul>
+</div>
+
+</nav>
+</header>
+
+
+<main>
+
+<section class="hero" id="home">
+
+<div class="hero-text">
+
+<h1>Explore the Wonders of Space</h1>
+
+<p>
+Discover the latest scientific discoveries, black holes,
+galaxies, and the mysteries of the universe through
+beautiful visualizations and reliable news.
+</p>
+
+<a href="explore space.html" class="btn">Explore Now</a>
+
+</div>
+
+<div class="hero-image">
+
+<img src="https://www.sciencedaily.com/images/1920/dramatic-black-hole.webp" alt="Black Hole">
+
+</div>
+
+</section>
+
+
+<section class="content-section" id="science">
+
+<div class="content-box">
+
+<h2>🔬 Space Science</h2>
+
+<p>
+Space science helps us understand planets, stars, galaxies,
+black holes and the origin of the universe. Scientists use
+telescopes, spacecraft and advanced computer simulations
+to explore the mysteries of space.
+</p>
+
+<div class="cards">
+
+<div class="card">
+<h3>🌌 Galaxies</h3>
+<p>
+Galaxies contain billions of stars, planets, gas and dust
+held together by gravity.
+</p>
+</div>
+
+<div class="card">
+<h3>🕳️ Black Holes</h3>
+<p>
+Black holes are regions of space where gravity is extremely
+strong and even light cannot escape.
+</p>
+</div>
+
+<div class="card">
+<h3>🪐 Planets</h3>
+<p>
+Planets orbit stars and can have very different environments,
+atmospheres and compositions.
+</p>
+</div>
+
+<div class="card">
+<h3>⭐ Stars</h3>
+<p>
+Stars are enormous balls of hot plasma that produce energy
+through nuclear fusion.
+</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section class="content-section" id="visualization">
+
+<div class="content-box visualization-box">
+
+<h2>🌠 Space Visualization</h2>
+
+<p>
+Watch this simple animated orbital system representing the
+motion of an object around a massive central body.
+</p>
+
+<div class="orbit">
+    <div class="planet"></div>
+</div>
+
+<p>
+Explore the movement of planets, stars and other objects
+through interactive space visualizations.
+</p>
+
+</div>
+
+</section>
+
+
+<section class="content-section" id="news">
+
+<div class="content-box">
+
+<h2>📰 Space News</h2>
+
+<div class="news-item">
+<h3>🚀 Space Exploration</h3>
+<p>
+New missions continue to expand our understanding of planets,
+moons, asteroids and distant regions of space.
+</p>
+</div>
+
+<div class="news-item">
+<h3>🔭 Astronomy Discoveries</h3>
+<p>
+Modern telescopes allow scientists to observe distant galaxies,
+stars and cosmic events across the universe.
+</p>
+</div>
+
+<div class="news-item">
+<h3>🌌 Black Hole Research</h3>
+<p>
+Scientists continue studying black holes and the extreme
+physics occurring near their boundaries.
+</p>
+</div>
+
+</div>
+
+</section>
+
+
+<section class="content-section" id="about">
+
+<div class="content-box">
+
+<h2>🚀 About Space-Y</h2>
+
+<p>
+Space-Y is a space exploration website designed to make
+information about the universe easier and more interesting
+to explore.
+</p>
+
+<ul class="about-list">
+<li>Explore space science and astronomy.</li>
+<li>Learn about black holes and galaxies.</li>
+<li>View interactive space visualizations.</li>
+<li>Read space-related information and news.</li>
+<li>Discover fascinating facts about the universe.</li>
+</ul>
+
+<a href="#home" class="btn back-btn">Back to Home</a>
+
+</div>
+
+</section>
+
+</main>
+
+
+<script>
+
+document.querySelectorAll('.right ul li a').forEach(link => {
+
+    link.addEventListener('click', function(e){
+
+        e.preventDefault();
+
+        const target = document.querySelector(this.getAttribute('href'));
+
+        if(target){
+            target.scrollIntoView({
+                behavior:'smooth'
+            });
+        }
+
+    });
+
+});
+
+</script>
+
+</body>
+</html>

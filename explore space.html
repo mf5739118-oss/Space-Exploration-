@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Explore Space</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:
+        linear-gradient(rgba(0,0,25,.45),rgba(0,0,0,.85)),
+        url("https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=2000&q=90");
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+    background-repeat:no-repeat;
+    color:white;
+}
+
+header{
+    text-align:center;
+    padding:50px 20px;
+}
+
+header h1{
+    font-size:55px;
+    margin-bottom:15px;
+}
+
+header p{
+    font-size:20px;
+    color:#ddd;
+    max-width:700px;
+    margin:auto;
+}
+
+.grid{
+    width:90%;
+    max-width:1200px;
+    margin:50px auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:30px;
+}
+
+.item{
+    background:rgba(255,255,255,.08);
+    backdrop-filter:blur(10px);
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 10px 25px rgba(0,0,0,.5);
+    transition:.4s;
+    text-align:center;
+}
+
+.item:hover{
+    transform:translateY(-12px);
+    box-shadow:0 20px 40px rgba(0,255,255,.4);
+}
+
+.item img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+    display:block;
+    background:linear-gradient(135deg,#101d35,#263d61);
+}
+
+.image-unavailable, .image-search-unavailable{
+    background:linear-gradient(135deg,#101d35,#263d61);
+    object-fit:contain;
+    min-height:220px;
+}
+
+.content{
+    padding:20px;
+}
+
+.content h2{
+    font-size:24px;
+    margin-bottom:10px;
+}
+
+.content p{
+    color:#ccc;
+    font-size:15px;
+    line-height:1.6;
+    margin-bottom:18px;
+}
+
+button{
+    border:none;
+    padding:12px 22px;
+    border-radius:30px;
+    background:linear-gradient(45deg,#00c6ff,#0072ff);
+    color:white;
+    font-size:15px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+button:hover{
+    transform:scale(1.08);
+    box-shadow:0 5px 20px rgba(0,198,255,.5);
+}
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.8);
+    backdrop-filter:blur(8px);
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+    z-index:1000;
+}
+
+.modal-box{
+    width:90%;
+    max-width:750px;
+    max-height:90vh;
+    overflow-y:auto;
+    background:rgba(15,25,45,.95);
+    border:1px solid rgba(255,255,255,.15);
+    border-radius:20px;
+    padding:30px;
+    position:relative;
+    box-shadow:0 20px 60px rgba(0,0,0,.7);
+}
+
+.modal-box img{
+    width:100%;
+    height:300px;
+    object-fit:cover;
+    border-radius:15px;
+    margin-bottom:20px;
+    display:block;
+}
+
+.modal-box h2{
+    font-size:34px;
+    margin-bottom:15px;
+}
+
+.modal-box p{
+    color:#ddd;
+    line-height:1.8;
+    margin-bottom:12px;
+}
+
+.close{
+    position:absolute;
+    right:20px;
+    top:15px;
+    font-size:32px;
+    color:white;
+    cursor:pointer;
+    z-index:5;
+}
+
+.close:hover{
+    color:#00eaff;
+}
+
+.info{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:15px;
+    margin-top:20px;
+}
+
+.info-box{
+    background:rgba(255,255,255,.06);
+    padding:15px;
+    border-radius:12px;
+}
+
+.info-box strong{
+    display:block;
+    color:#00eaff;
+    margin-bottom:5px;
+}
+
+footer{
+    text-align:center;
+    padding:40px 20px;
+    color:#aaa;
+    margin-top:50px;
+}
+
+/* MOBILE RESPONSIVE DESIGN */
+
+@media(max-width:768px){
+
+    header{
+        padding:35px 15px;
+    }
+
+    header h1{
+        font-size:36px;
+    }
+
+    header p{
+        font-size:15px;
+        line-height:1.7;
+    }
+
+    .grid{
+        width:92%;
+        margin:30px auto;
+        grid-template-columns:1fr;
+        gap:20px;
+    }
+
+    .item{
+        border-radius:15px;
+    }
+
+    .item img{
+        height:230px;
+    }
+
+    .content{
+        padding:18px;
+    }
+
+    .content h2{
+        font-size:22px;
+    }
+
+    .content p{
+        font-size:14px;
+    }
+
+    button{
+        width:100%;
+        padding:13px;
+        font-size:15px;
+    }
+
+    .modal{
+        padding:12px;
+    }
+
+    .modal-box{
+        width:100%;
+        max-height:90vh;
+        padding:20px;
+        border-radius:15px;
+    }
+
+    .modal-box img{
+        height:200px;
+    }
+
+    .modal-box h2{
+        font-size:25px;
+    }
+
+    .modal-box p{
+        font-size:14px;
+    }
+
+    .info{
+        grid-template-columns:1fr;
+        gap:10px;
+    }
+
+    .info-box{
+        padding:12px;
+    }
+
+    .close{
+        right:15px;
+        top:10px;
+        font-size:28px;
+    }
+
+    footer{
+        padding:25px 15px;
+        font-size:13px;
+    }
+}
+
+/* SMALL MOBILE DEVICES */
+
+@media(max-width:400px){
+
+    header h1{
+        font-size:30px;
+    }
+
+    .item img{
+        height:190px;
+    }
+
+    .modal-box img{
+        height:170px;
+    }
+
+    .modal-box h2{
+        font-size:22px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>🚀 Explore Space</h1>
+    <p>Discover the most fascinating objects and mysteries hidden across the universe.</p>
+</header>
+
+<section class="grid">
+
+    <div class="item">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/1/15/Sag_A%2A.jpg" alt="Sagittarius A*">
+        <div class="content">
+            <h2>Sagittarius A*</h2>
+            <p>The supermassive black hole at the center of our Milky Way galaxy.</p>
+            <button onclick="viewDetails('Sagittarius A*')">View Details</button>
+        </div>
+    </div>
+
+    <div class="item">
+        <img src="https://cdn.britannica.com/58/181858-050-44CDC017/conception-Artist-Cygnus-X-1-black-hole-companion.jpg" alt="Cygnus X-1">
+        <div class="content">
+            <h2>Cygnus X-1</h2>
+            <p>One of the strongest known X-ray sources in our galaxy.</p>
+            <button onclick="viewDetails('Cygnus X-1')">View Details</button>
+        </div>
+    </div>
+
+    <div class="item">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/07/Messier_87_Hubble_WikiSky.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original" alt="Messier 87">
+        <div class="content">
+            <h2>Messier 87*</h2>
+            <p>A famous supermassive black hole photographed by the Event Horizon Telescope.</p>
+            <button onclick="viewDetails('Messier 87*')">View Details</button>
+        </div>
+    </div>
+
+    <div class="item">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSRK22NFOPemSGokUJQzcsLUG1PWmQPJwG9G6iQoNKaxM46lSc6pdi1Ww7&s=10" alt="TON 618">
+        <div class="content">
+            <h2>TON 618</h2>
+            <p>An enormous quasar powered by one of the most massive black holes known.</p>
+            <button onclick="viewDetails('TON 618')">View Details</button>
+        </div>
+    </div>
+
+    <div class="item">
+        <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=1200&q=85" alt="Phoenix A">
+        <div class="content">
+            <h2>Phoenix A</h2>
+            <p>A gigantic black hole associated with the Phoenix galaxy cluster.</p>
+            <button onclick="viewDetails('Phoenix A')">View Details</button>
+        </div>
+    </div>
+
+    <div class="item">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/d/df/Holmberg_15A_chandra.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original" alt="Holmberg 15A">
+        <div class="content">
+            <h2>Holmberg 15A*</h2>
+            <p>A giant black hole located in the center of the galaxy Holmberg 15A.</p>
+            <button onclick="viewDetails('Holmberg 15A*')">View Details</button>
+        </div>
+    </div>
+
+    <div class="item">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/7/75/ESO_243-49_%28HST%29.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original" alt="HLX-1">
+        <div class="content">
+            <h2>HLX-1</h2>
+            <p>A remarkable intermediate-mass black hole candidate.</p>
+            <button onclick="viewDetails('HLX-1')">View Details</button>
+        </div>
+    </div>
+
+    <div class="item">
+        <img src="https://cdn.mos.cms.futurecdn.net/QHvQLhnFjrD6RgWgyZSHRn-1920-80.jpg" alt="Mercury">
+        <div class="content">
+            <h2>Mercury</h2>
+            <p>The smallest planet and closest to the Sun.</p>
+            <button onclick="viewDetails('Mercury')">View Details</button>
+        </div>
+    </div>
+
+    <div class="item">
+        <img src="https://media.wired.com/photos/5e59ad2b79c7100008eb6ae8/master/w_1600%2Cc_limit/photo_space_venus_1_S91-50688.jpg" alt="Venus">
+        <div class="content">
+            <h2>Venus</h2>
+            <p>A scorching planet with a thick carbon-dioxide atmosphere.</p>
+            <button onclick="viewDetails('Venus')">View Details</button>
+        </div>
+    </div>
+
+    <div class="item">
+        <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2d/Meteosat-12-fci-march-equinox-2025-noon.jpg/330px-Meteosat-12-fci-march-equinox-2025-noon.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail" alt="Earth">
+        <div class="content">
+            <h2>Earth</h2>
+            <p>Our home planet, with liquid water and known life.</p>
+            <button onclick="viewDetails('Earth')">View Details</button>
+        </div>
+    </div>
+
+    <div class="item">
+        <img src="https://space-facts.com/wp-content/uploads/mars.jpg" alt="Mars">
+        <div class="content">
+            <h2>Mars</h2>
+            <p>The red planet, home to giant volcanoes and ancient river valleys.</p>
+            <button onclick="viewDetails('Mars')">View Details</button>
+        </div>
+    </div>
+
+    <div class="item">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e2/Jupiter_OPAL_2024.png?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original" alt="Jupiter">
+        <div class="content">
+            <h2>Jupiter</h2>
+            <p>The Solar System's largest planet, famous for its Great Red Spot.</p>
+            <button onclick="viewDetails('Jupiter')">View Details</button>
+        </div>
+    </div>
+
+    <div class="item">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcS7jFwfCUZN1unrzFz2g8YVW9ajUqoaY46TUMCY_wWrzUObvsAGGPqI5u&s=10" alt="Saturn">
+        <div class="content">
+            <h2>Saturn</h2>
+            <p>A gas giant surrounded by spectacular rings.</p>
+            <button onclick="viewDetails('Saturn')">View Details</button>
+        </div>
+    </div>
+
+    <div class="item">
+        <img src="https://ichef.bbci.co.uk/images/ic/480xn/p0257vk5.jpg.webp" alt="Uranus">
+        <div class="content">
+            <h2>Uranus</h2>
+            <p>An ice giant that rotates almost on its side.</p>
+            <button onclick="viewDetails('Uranus')">View Details</button>
+        </div>
+    </div>
+
+    <div class="item">
+        <img src="https://cdn.mos.cms.futurecdn.net/PezBzd9Fehsq9XWgWMauVV.jpg" alt="Neptune">
+        <div class="content">
+            <h2>Neptune</h2>
+            <p>A distant blue ice giant with extremely fast winds.</p>
+            <button onclick="viewDetails('Neptune')">View Details</button>
+        </div>
+    </div>
+
+    <div class="item">
+        <img src="https://sdo.gsfc.nasa.gov/assets/img/latest/latest_1024_0304.jpg" alt="The Sun">
+        <div class="content">
+            <h2>The Sun</h2>
+            <p>The star at the centre of our Solar System.</p>
+            <button onclick="viewDetails('The Sun')">View Details</button>
+        </div>
+    </div>
+
+    <div class="item">
+        <img src="https://www.star-facts.com/wp-content/uploads/2019/09/Sirius-star.webp" alt="Sirius">
+        <div class="content">
+            <h2>Sirius</h2>
+            <p>The brightest star in Earth's night sky.</p>
+            <button onclick="viewDetails('Sirius')">View Details</button>
+        </div>
+    </div>
+
+    <div class="item">
+        <img src="https://static.scientificamerican.com/dam/asset/276d40a1-b75f-4ad2-baf9-318c8d46dd54/btlgsb.jpg?m=1791312449.982&w=600" alt="Betelgeuse">
+        <div class="content">
+            <h2>Betelgeuse</h2>
+            <p>A red supergiant star in the constellation Orion.</p>
+            <button onclick="viewDetails('Betelgeuse')">View Details</button>
+        </div>
+    </div>
+
+    <div class="item">
+        <img src="https://cdn.mos.cms.futurecdn.net/DvqESJ7TSEU2HbrocQe9NL.jpg" alt="Polaris">
+        <div class="content">
+            <h2>Polaris</h2>
+            <p>The North Star, close to the north celestial pole.</p>
+            <button onclick="viewDetails('Polaris')">View Details</button>
+        </div>
+    </div>
+
+    <div class="item">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEir5o4R9TSsnXgiqBUJJvsch3DIFpohq8CJOtJ7RceQ&s=10" alt="V404 Cygni">
+        <div class="content">
+            <h2>V404 Cygni</h2>
+            <p>A black-hole binary known for powerful outbursts.</p>
+            <button onclick="viewDetails('V404 Cygni')">View Details</button>
+        </div>
+    </div>
+
+    <div class="item">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e2/NGC_1277_viewed_by_Hubble.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original" alt="NGC 1277">
+        <div class="content">
+            <h2>NGC 1277*</h2>
+            <p>A compact galaxy studied for its unusually massive central black hole.</p>
+            <button onclick="viewDetails('NGC 1277*')">View Details</button>
+        </div>
+    </div>
+
+    <div class="item">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6B5SxxIgsrKeQlzGlEjPaZVmHEFBuAmILte6vdTTOHA&s=10" alt="LMC X-1">
+        <div class="content">
+            <h2>LMC X-1</h2>
+            <p>An X-ray binary containing a stellar-mass black hole.</p>
+            <button onclick="viewDetails('LMC X-1')">View Details</button>
+        </div>
+    </div>
+
+</section>
+
+<div class="modal" id="detailsModal">
+
+    <div class="modal-box">
+
+        <span class="close" onclick="closeDetails()">&times;</span>
+
+        <img id="modalImage" src="" alt="Space Object">
+
+        <h2 id="modalTitle"></h2>
+
+        <p id="modalDescription"></p>
+
+        <div class="info">
+
+            <div class="info-box">
+                <strong>Type</strong>
+                <span id="modalType"></span>
+            </div>
+
+            <div class="info-box">
+                <strong>Location</strong>
+                <span id="modalLocation"></span>
+            </div>
+
+            <div class="info-box">
+                <strong>Mass</strong>
+                <span id="modalMass"></span>
+            </div>
+
+            <div class="info-box">
+                <strong>Distance</strong>
+                <span id="modalDistance"></span>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<footer>
+    <p>🌌 Explore the universe and discover its incredible mysteries.</p>
+    <p>&copy; 2026 Space-Y. All Rights Reserved.</p>
+    <p>Images belong to their respective owners.</p>
+</footer>
+
+<script>
+
+const spaceObjects = {
+
+    "Sagittarius A*": {
+        image:"https://upload.wikimedia.org/wikipedia/commons/1/15/Sag_A%2A.jpg",
+        description:"Sagittarius A* is the supermassive black hole located at the heart of the Milky Way galaxy. Scientists estimate that it has a mass millions of times greater than our Sun.",
+        type:"Supermassive Black Hole",
+        location:"Center of the Milky Way",
+        mass:"≈ 4.3 million Solar Masses",
+        distance:"≈ 26,000 light-years"
+    },
+
+    "Cygnus X-1": {
+        image:"https://svs.gsfc.nasa.gov/vis/a000000/a004900/a004997/Cyg_X-1.00001_print.jpg",
+        description:"Cygnus X-1 is a stellar-mass black hole system discovered through its powerful X-ray emissions. It is orbiting a massive companion star.",
+        type:"Stellar Black Hole",
+        location:"Cygnus Constellation",
+        mass:"≈ 21 Solar Masses",
+        distance:"≈ 6,000 light-years"
+    },
+
+    "Messier 87*": {
+        image:"https://upload.wikimedia.org/wikipedia/commons/4/4f/M87_black_hole.png",
+        description:"Messier 87* is a supermassive black hole in the center of the giant elliptical galaxy Messier 87. It became world famous after the Event Horizon Telescope captured its shadow.",
+        type:"Supermassive Black Hole",
+        location:"Virgo Cluster",
+        mass:"≈ 6.5 billion Solar Masses",
+        distance:"≈ 55 million light-years"
+    },
+
+    "TON 618": {
+        image:"https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=1200&q=85",
+        description:"TON 618 is an extremely distant quasar powered by a gigantic black hole. It is considered one of the largest known black holes.",
+        type:"Quasar Black Hole",
+        location:"Canes Venatici",
+        mass:"≈ 40 billion Solar Masses",
+        distance:"≈ 18.2 billion light-years"
+    },
+
+    "Phoenix A": {
+        image:"https://upload.wikimedia.org/wikipedia/commons/1/1d/Betelgeuse_size_comparison.jpg",
+        description:"Phoenix A is an enormous black hole candidate located in the Phoenix galaxy cluster. It is associated with one of the most powerful active galactic environments known.",
+        type:"Supermassive Black Hole",
+        location:"Phoenix Cluster",
+        mass:"≈ 100 billion Solar Masses",
+        distance:"≈ 5.8 billion light-years"
+    },
+
+    "Holmberg 15A*": {
+        image:"https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=1200&q=85",
+        description:"Holmberg 15A* is an extremely massive black hole located at the center of the giant galaxy Holmberg 15A.",
+        type:"Supermassive Black Hole",
+        location:"Abell 85 Cluster",
+        mass:"≈ 40 billion Solar Masses",
+        distance:"≈ 700 million light-years"
+    },
+
+    "HLX-1": {
+        image:"https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=1200&q=85",
+        description:"HLX-1 is a strong candidate for an intermediate-mass black hole. It produces powerful X-ray emissions and may represent a missing link between stellar and supermassive black holes.",
+        type:"Intermediate-Mass Black Hole",
+        location:"ESO 243-49 Galaxy",
+        mass:"≈ 10,000 Solar Masses",
+        distance:"≈ 290 million light-years"
+    },
+
+    "Mercury": {
+        image:"https://photojournal.jpl.gov/jpeg/PIA15162.jpg",
+        description:"Mercury is the smallest planet and the closest to the Sun. Its heavily cratered surface resembles the Moon. With almost no substantial atmosphere, it experiences extreme temperature changes between day and night.",
+        type:"Terrestrial Planet",
+        location:"Solar System — first planet from the Sun",
+        mass:"3.30 × 10^23 kg",
+        distance:"≈ 77 million km from Earth on average"
+    },
+
+    "Venus": {
+        image:"https://photojournal.jpl.gov/jpeg/PIA00104.jpg",
+        description:"Venus is the second planet from the Sun. Its dense carbon-dioxide atmosphere traps heat in an extreme greenhouse effect, making its surface the hottest of the eight planets. Thick clouds of sulfuric acid surround it.",
+        type:"Terrestrial Planet",
+        location:"Solar System — second planet from the Sun",
+        mass:"4.87 × 10^24 kg",
+        distance:"≈ 41 million km from Earth at closest approach"
+    },
+
+    "Earth": {
+        image:"https://assets.science.nasa.gov/content/dam/science/esd/eo/images/imagerecords/0/885/modis_wonderglobe_lrg.jpg",
+        description:"Earth is the third planet from the Sun and the only world currently known to support life. Around 71 percent of its surface is covered by water. Its atmosphere and magnetic field help protect life.",
+        type:"Terrestrial Planet",
+        location:"Solar System — third planet from the Sun",
+        mass:"5.97 × 10^24 kg",
+        distance:"≈ 149.6 million km from the Sun"
+    },
+
+    "Mars": {
+        image:"https://photojournal.jpl.gov/jpeg/PIA04591.jpg",
+        description:"Mars is a cold desert world called the Red Planet because iron minerals in its soil have oxidized. It has Olympus Mons, the largest known volcano in the Solar System, and evidence of ancient flowing water.",
+        type:"Terrestrial Planet",
+        location:"Solar System — fourth planet from the Sun",
+        mass:"6.42 × 10^23 kg",
+        distance:"≈ 225 million km from the Sun"
+    },
+
+    "Jupiter": {
+        image:"https://photojournal.jpl.gov/jpeg/PIA02873.jpg",
+        description:"Jupiter is the largest planet, a gas giant made mostly of hydrogen and helium. Its Great Red Spot is a giant storm observed for centuries. Its moons include Europa and Ganymede.",
+        type:"Gas Giant",
+        location:"Solar System — fifth planet from the Sun",
+        mass:"1.90 × 10^27 kg",
+        distance:"≈ 778 million km from the Sun"
+    },
+
+    "Saturn": {
+        image:"https://photojournal.jpl.gov/jpeg/PIA01364.jpg",
+        description:"Saturn is a gas giant famous for its rings, made mainly of ice and rocky particles. It has many moons, including Titan, which has lakes and rivers of liquid methane and ethane.",
+        type:"Gas Giant",
+        location:"Solar System — sixth planet from the Sun",
+        mass:"5.68 × 10^26 kg",
+        distance:"≈ 1.43 billion km from the Sun"
+    },
+
+    "Uranus": {
+        image:"https://photojournal.jpl.gov/jpeg/PIA18182.jpg",
+        description:"Uranus is an ice giant whose blue-green colour comes from methane in its atmosphere. It rotates at an extreme tilt, creating unusual seasons that last many Earth years.",
+        type:"Ice Giant",
+        location:"Solar System — seventh planet from the Sun",
+        mass:"8.68 × 10^25 kg",
+        distance:"≈ 2.87 billion km from the Sun"
+    },
+
+    "Neptune": {
+        image:"https://photojournal.jpl.gov/jpeg/PIA01492.jpg",
+        description:"Neptune is the eighth and most distant recognized planet from the Sun. This ice giant has a deep-blue atmosphere and extremely fast winds. Its largest moon is Triton.",
+        type:"Ice Giant",
+        location:"Solar System — eighth planet from the Sun",
+        mass:"1.02 × 10^26 kg",
+        distance:"≈ 4.50 billion km from the Sun"
+    },
+
+    "The Sun": {
+        image:"https://sdo.gsfc.nasa.gov/assets/img/latest/latest_1024_0304.jpg",
+        description:"The Sun is a G-type main-sequence star at the centre of our Solar System. Nuclear fusion in its core converts hydrogen into helium and releases the energy that powers our planetary system.",
+        type:"G-type Main-Sequence Star",
+        location:"Centre of the Solar System",
+        mass:"≈ 1.99 × 10^30 kg",
+        distance:"≈ 150 million km from Earth"
+    },
+
+    "Sirius": {
+        image:"https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?auto=format&fit=crop&w=1200&q=85",
+        description:"Sirius is the brightest star in Earth's night sky. It is a binary system: Sirius A is a bright main-sequence star and Sirius B is a faint white dwarf.",
+        type:"Binary Star System",
+        location:"Canis Major constellation",
+        mass:"Sirius A ≈ 2 solar mass; Sirius B ≈ 1 solar mass",
+        distance:"≈ 8.6 light-years from Earth"
+    },
+
+    "Betelgeuse": {
+        image:"https://upload.wikimedia.org/wikipedia/commons/1/1d/Betelgeuse_size_comparison.jpg",
+        description:"Betelgeuse is a red supergiant in Orion. It is in a late stage of stellar evolution and is expected to eventually explode as a supernova, although its timing is unknown. Its size and brightness vary.",
+        type:"Red Supergiant Star",
+        location:"Orion constellation",
+        mass:"Roughly 10–20 solar masses (estimated)",
+        distance:"≈ 500–600 light-years from Earth"
+    },
+
+    "Polaris": {
+        image:"https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=1200&q=85",
+        description:"Polaris is known as the North Star because it lies close to the north celestial pole. It is a Cepheid variable, so its brightness changes in a regular cycle, and it belongs to a multiple-star system.",
+        type:"Cepheid Variable Star",
+        location:"Ursa Minor constellation",
+        mass:"≈ 5–6 solar mass (primary star estimate)",
+        distance:"≈ 430 light-years from Earth"
+    },
+
+    "V404 Cygni": {
+        image:"https://svs.gsfc.nasa.gov/vis/a000000/a004900/a004997/V404_Cyg.00001_print.jpg",
+        description:"V404 Cygni is a binary system containing a black hole and a companion star. Gas pulled from the companion forms a hot accretion disk and can produce dramatic X-ray and optical outbursts.",
+        type:"Stellar-Mass Black Hole",
+        location:"Cygnus constellation",
+        mass:"≈ 9 solar mass",
+        distance:"≈ 7,800 light-years from Earth"
+    },
+
+    "NGC 1277*": {
+        image:"https://upload.wikimedia.org/wikipedia/commons/4/4f/M87_black_hole.png",
+        description:"NGC 1277 is a compact galaxy in the Perseus Cluster. Its central black hole has been studied because some measurements suggest it may be unusually massive compared with the galaxy's stars. Estimates remain under scientific study.",
+        type:"Supermassive Black Hole Candidate",
+        location:"Perseus Cluster",
+        mass:"Several billion solar mass in some published estimates",
+        distance:"≈ 220 million light-years from Earth"
+    },
+
+    "LMC X-1": {
+        image:"https://svs.gsfc.nasa.gov/vis/a000000/a004900/a004997/LMC_X-1.00001_print.jpg",
+        description:"LMC X-1 is a bright X-ray binary in the Large Magellanic Cloud. It contains a black hole orbiting a massive companion star. Gas flowing from the star heats up as it moves toward the black hole and emits X-rays.",
+        type:"Stellar-Mass Black Hole",
+        location:"Large Magellanic Cloud",
+        mass:"≈ 10–11 solar mass",
+        distance:"≈ 160,000 light-years from Earth"
+    }
+
+};
+
+const fallbackPalettes = {
+    "Sagittarius A*":["#090b25","#ff9d32","#fff0bc"],
+    "Cygnus X-1":["#081b36","#dc62bb","#f5c4ff"],
+    "Messier 87*":["#07152e","#e58b37","#fff0bd"],
+    "TON 618":["#170b36","#42b9ff","#d9a6ff"],
+    "Phoenix A":["#260b32","#ff5d6c","#ffd18a"],
+    "Holmberg 15A*":["#101b3b","#7d75ff","#d6caff"],
+    "HLX-1":["#071f2c","#27d7c5","#d2fff5"],
+    "Mercury":["#241d1a","#a79a8d","#eee2d2"],
+    "Venus":["#3c1e09","#e5a64c","#fff0bd"],
+    "Earth":["#061a46","#2aa8ff","#8fffd0"],
+    "Mars":["#35140c","#d85b32","#ffd0a0"],
+    "Jupiter":["#2b160e","#d29a62","#ffe0b3"],
+    "Saturn":["#24190f","#d9b77c","#fff0cc"],
+    "Uranus":["#092b3c","#6edbdc","#d7ffff"],
+    "Neptune":["#071b4e","#286cff","#b2d2ff"],
+    "The Sun":["#401306","#ff8a00","#fff0a8"],
+    "Sirius":["#081b3b","#79baff","#ffffff"],
+    "Betelgeuse":["#35100a","#e45d39","#ffd0a3"],
+    "Polaris":["#101b3b","#d3e3ff","#ffffff"],
+    "V404 Cygni":["#260e2a","#e85d8f","#ffd1e7"],
+    "NGC 1277*":["#11162f","#9a83d9","#e6d7ff"],
+    "LMC X-1":["#251407","#db8735","#ffe0a6"]
+};
+
+function makeFallbackImage(objectName){
+
+    const colors=fallbackPalettes[objectName]||["#08152f","#397ac8","#d8eaff"];
+
+    const isBlackHole=/\*|TON 618|HLX-1|V404|LMC X-1/i.test(objectName);
+    const isStar=/Sun|Sirius|Betelgeuse|Polaris/i.test(objectName);
+
+    let seed=0;
+
+    for(let i=0;i<objectName.length;i++){
+        seed=(seed*31+objectName.charCodeAt(i))>>>0;
+    }
+
+    let stars="";
+
+    for(let i=0;i<34;i++){
+
+        seed=(seed*1664525+1013904223)>>>0;
+        const x=seed%900;
+
+        seed=(seed*1664525+1013904223)>>>0;
+        const y=seed%500;
+
+        const r=((seed>>>8)%3)+1;
+
+        stars+=`<circle cx="${x}" cy="${y}" r="${r}" fill="#ffffff" opacity=".${5+(seed%5)}"/>`;
+    }
+
+    let objectGraphic="";
+
+    if(isBlackHole){
+
+        objectGraphic=`
+        <ellipse cx="450" cy="245" rx="190" ry="65"
+        fill="none" stroke="${colors[1]}" stroke-width="27"
+        opacity=".9" transform="rotate(-18 450 245)"/>
+
+        <ellipse cx="450" cy="245" rx="135" ry="45"
+        fill="none" stroke="${colors[2]}" stroke-width="8"
+        opacity=".8" transform="rotate(-18 450 245)"/>
+
+        <circle cx="450" cy="245" r="62" fill="#02030a"/>
+        `;
+
+    }else if(isStar){
+
+        objectGraphic=`
+        <circle cx="450" cy="245" r="150"
+        fill="${colors[1]}" opacity=".18"/>
+
+        <circle cx="450" cy="245" r="94"
+        fill="${colors[1]}"/>
+
+        <circle cx="420" cy="210" r="28"
+        fill="${colors[2]}" opacity=".55"/>
+        `;
+
+    }else{
+
+        objectGraphic=`
+        <circle cx="450" cy="245" r="125"
+        fill="${colors[1]}"/>
+
+        <ellipse cx="410" cy="205" rx="53" ry="25"
+        fill="${colors[2]}" opacity=".28"/>
+
+        <path d="M330 265 Q450 320 570 260"
+        fill="none" stroke="${colors[2]}"
+        stroke-width="12" opacity=".45"/>
+        `;
+    }
+
+    const safeName=objectName
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;");
+
+    const svg=`
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500">
+
+        <defs>
+            <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+                <stop stop-color="${colors[0]}"/>
+                <stop offset="1" stop-color="#030611"/>
+            </linearGradient>
+
+            <radialGradient id="glow">
+                <stop stop-color="${colors[2]}" stop-opacity=".65"/>
+                <stop offset="1" stop-color="${colors[1]}" stop-opacity="0"/>
+            </radialGradient>
+        </defs>
+
+        <rect width="900" height="500" fill="url(#bg)"/>
+
+        <ellipse cx="450" cy="245" rx="310" ry="210" fill="url(#glow)"/>
+
+        ${stars}
+
+        ${objectGraphic}
+
+        <text x="450" y="455" fill="#ffffff"
+        font-size="29" text-anchor="middle"
+        font-family="Arial,sans-serif" opacity=".9">
+        ${safeName}
+        </text>
+
+        <text x="450" y="483" fill="#c9d7ef"
+        font-size="13" text-anchor="middle"
+        font-family="Arial,sans-serif">
+        SPACE ILLUSTRATION
+        </text>
+
+    </svg>`;
+
+    return "data:image/svg+xml;charset=UTF-8,"+encodeURIComponent(svg);
+}
+
+function addImageFallback(img,objectName){
+
+    img.alt=objectName;
+
+    img.onerror=function(){
+        this.onerror=null;
+        this.src=makeFallbackImage(objectName);
+        this.classList.add("image-unavailable");
+    };
+
+    if(!img.getAttribute("src")||(img.complete&&img.naturalWidth===0)){
+
+        img.onerror=null;
+        img.src=makeFallbackImage(objectName);
+        img.classList.add("image-unavailable");
+    }
+}
+
+function loadCardImages(){
+
+    const usedImageSources=new Set();
+
+    document.querySelectorAll(".item").forEach(card=>{
+
+        const title=card.querySelector("h2");
+        const img=card.querySelector("img");
+
+        if(!title||!img)return;
+
+        const objectName=title.textContent.trim();
+        const source=img.getAttribute("src");
+
+        if(source&&usedImageSources.has(source)){
+
+            img.onerror=null;
+            img.src=makeFallbackImage(objectName);
+            img.classList.add("image-unavailable");
+
+        }else if(source){
+
+            usedImageSources.add(source);
+            addImageFallback(img,objectName);
+
+        }else{
+
+            addImageFallback(img,objectName);
+        }
+
+    });
+}
+
+function viewDetails(objectName){
+
+    const object=spaceObjects[objectName];
+
+    if(!object)return;
+
+    const modalImage=document.getElementById("modalImage");
+
+    const matchingCard=[...document.querySelectorAll(".item")].find(card=>
+        card.querySelector("h2")?.textContent.trim()===objectName
+    );
+
+    const cardImage=matchingCard?.querySelector("img");
+
+    modalImage.onerror=null;
+    modalImage.src=cardImage?.src||object.image||makeFallbackImage(objectName);
+
+    addImageFallback(modalImage,objectName);
+
+    document.getElementById("modalTitle").textContent=objectName;
+    document.getElementById("modalDescription").textContent=object.description;
+    document.getElementById("modalType").textContent=object.type;
+    document.getElementById("modalLocation").textContent=object.location;
+    document.getElementById("modalMass").textContent=object.mass;
+    document.getElementById("modalDistance").textContent=object.distance;
+
+    document.getElementById("detailsModal").style.display="flex";
+}
+
+function closeDetails(){
+
+    document.getElementById("detailsModal").style.display="none";
+
+}
+
+window.onclick=function(event){
+
+    const modal=document.getElementById("detailsModal");
+
+    if(event.target===modal){
+        closeDetails();
+    }
+
+};
+
+loadCardImages();
+
+</script>
+
+</body>
+</html>
